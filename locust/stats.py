@@ -685,25 +685,21 @@ def requests_csv():
             '"Name"',
             '"# requests"',
             '"# failures"',
-            '"Median response time"',
             '"Average response time"',
-            '"Min response time"',
-            '"Max response time"',
+            '"Start time"',
             '"Average Content Size"',
             '"Requests/s"',
         ])
     ]
 
     for s in chain(sort_stats(runners.locust_runner.request_stats), [runners.locust_runner.stats.total]):
-        rows.append('"%s","%s",%i,%i,%i,%i,%i,%i,%i,%.2f' % (
+        rows.append('"%s","%s",%i,%i,%i,%i,%i,%.2f' % (
             s.method,
             s.name,
             s.num_requests,
             s.num_failures,
-            s.median_response_time,
             s.avg_response_time,
-            s.min_response_time or 0,
-            s.max_response_time,
+            s.start_time,
             s.avg_content_length,
             s.total_rps,
         ))
